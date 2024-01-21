@@ -1,4 +1,4 @@
-# log-retrieve 
+# log-analyzer-handler
 
 Requirements: This code runs within the Analyzer node
 
