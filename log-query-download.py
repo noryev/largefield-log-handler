@@ -13,7 +13,7 @@ collection_name = os.getenv('COLLECTION_NAME')
 downloads_dir = './analysisCIDs'  # Path for the 'downloads' directory
 api_key = os.getenv('R2_API_KEY')
 account_id = os.getenv('R2_ACCOUNT_ID')
-base_url = f'https://api.cloudflare.com/client/v4/accounts/{account_id}/storage/kv/namespaces'
+base_url = 'https://api.cloudflare.com/client/v4/accounts/{}/storage/kv/namespaces'.format(account_id)
 
 if not uri or not db_name or not collection_name or not api_key or not account_id:
     print 'One or more required environment variables are not set'
