@@ -1,7 +1,6 @@
 # Large Field Log Handler
-=======================
 
-## Introduction
+Introduction
 ------------
 
 `large-field-log-handler` is a suite of programs designed to facilitate the scanning of logs for the LargeFieldAnalyzer. This project is built to operate independently and is decoupled from other modules of the LargeFieldAnalyzer, ensuring modularity and ease of maintenance.
