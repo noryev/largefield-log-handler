@@ -43,11 +43,10 @@ def download_from_r2():
     client = MongoClient(uri)
 
     try:
-        client.connect()
         print 'Connected to MongoDB'
 
-        db = client[db_name]
-        collection = db[collection_name]
+        db = client[db_name]  # Access the database
+        collection = db[collection_name]  # Access the collection
 
         if not os.path.exists(downloads_dir):
             os.makedirs(downloads_dir)
@@ -65,5 +64,6 @@ def download_from_r2():
     finally:
         client.close()
         print 'MongoDB connection closed'
+
 
 download_from_r2()
