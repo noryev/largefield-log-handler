@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 uri = os.getenv('MONGO_URI')
 db_name = os.getenv('DB_NAME')
 collection_name = os.getenv('COLLECTION_NAME')
-downloads_dir = './analysisCIDs'  # Path for the 'downloads' directory
+downloads_dir = './analysisLogs'  # Path for the 'downloads' directory
 cloudflare_worker_auth_key = os.getenv('CLOUDFLARE_WORKER_AUTH_KEY')  # New variable for the custom auth key
 base_url = 'https://winter-surf-82a0.deanlaughing.workers.dev'
 
