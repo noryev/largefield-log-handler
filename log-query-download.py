@@ -15,11 +15,10 @@ uri = os.getenv('MONGO_URI')
 db_name = os.getenv('DB_NAME')
 collection_name = os.getenv('COLLECTION_NAME')
 downloads_dir = './analysisCIDs'  # Path for the 'downloads' directory
-api_key = os.getenv('R2_API_KEY')
-account_id = os.getenv('R2_ACCOUNT_ID')
-base_url = 'https://api.cloudflare.com/client/v4/accounts/{}/storage/kv/logs/'.format(account_id)
+cloudflare_worker_auth_key = os.getenv('CLOUDFLARE_WORKER_AUTH_KEY')  # New variable for the custom auth key
+base_url = 'https://winter-surf-82a0.deanlaughing.workers.dev'
 
-if not uri or not db_name or not collection_name or not api_key or not account_id:
+if not uri or not db_name or not collection_name or not cloudflare_worker_auth_key:
     logging.error('One or more required environment variables are not set')
     exit(1)
 
@@ -27,9 +26,8 @@ def download_file(file_name, local_path='./'):
     """ Downloads a file from Cloudflare R2 and saves it to the local path """
     try:
         logging.info('Attempting to download file: {}'.format(file_name))
-        response = requests.get('{}/files/{}'.format(base_url, file_name), headers={
-            'Authorization': 'Bearer {}'.format(api_key),
-            'Content-Type': 'application/json'
+        response = requests.get('{}/{}'.format(base_url, file_name), headers={
+            'X-Custom-Auth-Key': cloudflare_worker_auth_key  # Using the custom auth header
         }, stream=True)
 
         if response.status_code != 200:
@@ -43,6 +41,7 @@ def download_file(file_name, local_path='./'):
         logging.info("Successfully downloaded {}".format(file_name))
     except Exception as e:
         logging.exception("Error downloading file: {}".format(file_name))
+
 
 def download_from_r2():
     """ Connects to MongoDB and downloads specified files from Cloudflare R2 """
